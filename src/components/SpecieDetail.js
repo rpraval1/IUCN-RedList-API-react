@@ -40,38 +40,38 @@ class SpecieDetail extends Component {
   render(){
     const {resultSpecies} = this.state
     console.log(resultSpecies)
-    return(
-      <div>
-        <h1>
-          Selected {resultSpecies.country}
-        </h1>
+    if(resultSpecies.length > 0){
+      return(
+        <div>
+          <h1>
+            Selected {resultSpecies.country}
+          </h1>
 
-        <div className="table-responsive col-sm-4">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Taxonid</th>
-                <th>Scientific Name</th>
-                <th>Category</th>
-              </tr>
-            </thead>
-            <tbody>
-              {resultSpecies.length
-              ?
-              this.renderSpecies()
-              :
-              <tr>
-                <td>Fetching..</td>
-                <td>Fetching..</td>
-                <td>Fetching..</td>
-              </tr>
-              }
-
-            </tbody>
-          </table>
+          <div className="table-responsive col-sm-4">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Taxonid</th>
+                  <th>Scientific Name</th>
+                  <th>Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.renderSpecies()}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    else{
+      return(
+        <div>
+          <h1>Fetching Results...</h1>
+        </div>
+      );
+    }
+
   }
 }
 
