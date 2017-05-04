@@ -8,7 +8,7 @@ class SpecieDetail extends Component {
     }
   }
 
-  componentDidMount(){
+  componentWillMount(){
     const {isocode} = this.props
     var specieUrl = "http://apiv3.iucnredlist.org/api/v3/country/getspecies/"+isocode+"?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee";
 
@@ -39,12 +39,11 @@ class SpecieDetail extends Component {
 
   render(){
     const {resultSpecies} = this.state
-    console.log(resultSpecies)
-    if(resultSpecies.length > 0){
+    if(resultSpecies.count){
       return(
         <div>
           <h1>
-            Selected {resultSpecies.country}
+            Selected Country: {resultSpecies.country}
           </h1>
 
           <div className="table-responsive col-sm-4">

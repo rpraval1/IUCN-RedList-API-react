@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 
 class Header extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      inputValue: ''
+    };
+  }
+
+  handleInputChange(event){
+    this.setState({
+      inputValue: event.target.value
+    })
+    this.props.getCountrySearched(event.target.value)
+  }
+
   render(){
+    const {inputValue} = this.state
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
@@ -15,11 +30,14 @@ class Header extends Component{
             <a className="navbar-brand" href="#">Countries - Species</a>
           </div>
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form className="navbar-form navbar-left">
+            <form className="navbar-form navbar-right">
               <div className="form-group">
-                <input type="text" className="form-control" placeholder="Search" />
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={this.handleInputChange.bind(this)}
+                  placeholder="Search" />
               </div>
-              <button type="submit" className="btn btn-default">Submit</button>
             </form>
           </div>
         </div>

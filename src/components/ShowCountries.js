@@ -18,7 +18,7 @@ class ShowCountries extends Component {
   }
 
   render() {
-    const {countries} = this.props
+    const {countries, countrySearched} = this.props
     const {isocode} = this.state
     return (
       <div>
@@ -26,7 +26,7 @@ class ShowCountries extends Component {
           ?
           <SpecieDetail isocode={isocode}/>
           :
-          <CountryList countries={countries} getIsocode={this.getIsocode.bind(this)}/>
+          <CountryList countrySearched={countrySearched} countries={countries} getIsocode={this.getIsocode.bind(this)}/>
         }
       </div>
     );

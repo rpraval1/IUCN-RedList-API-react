@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../style/CountryList.css';
 
 class CountryList extends Component{
 
@@ -6,16 +7,29 @@ class CountryList extends Component{
     this.props.getIsocode(isocode)
   }
   renderCountryList(){
-    const {countries} = this.props
-
-    return countries.map(country => {
-      return (
-        <tr key={country.isocode}>
-          <td>{country.isocode}</td>
-          <td onClick={this.handleClick.bind(this, country.isocode)}>{country.country}</td>
-        </tr>
-      );
-    })
+    const {countries, countrySearched} = this.props
+    if(countrySearched){
+      return countries.map(country => {
+        if ((country.isocode.includes(countrySearched)) || (country.country.includes(countrySearched))){
+          return (
+            <tr key={country.isocode}>
+              <td onClick={this.handleClick.bind(this, country.isocode)}>{country.isocode}</td>
+              <td onClick={this.handleClick.bind(this, country.isocode)}>{country.country}</td>
+            </tr>
+          );
+        }
+      })
+    }
+    else{
+      return countries.map(country => {
+        return (
+          <tr className="select-country" key={country.isocode}>
+            <td onClick={this.handleClick.bind(this, country.isocode)}>{country.isocode}</td>
+            <td onClick={this.handleClick.bind(this, country.isocode)}>{country.country}</td>
+          </tr>
+        );
+      })
+    }
   }
   render(){
 

@@ -8,7 +8,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      countries: []
+      countries: [],
+      countrySearched: ''
     }
     var baseUrl = `http://apiv3.iucnredlist.org/api/v3/country/list?token=${API_KEY}`;
 
@@ -23,15 +24,20 @@ class App extends Component {
      })
   }
 
-
+  getCountrySearched(searchValue){
+    this.setState({
+      countrySearched: searchValue
+    })
+  }
 
 
   render() {
-    const {countries} = this.state
+    const {countries, countrySearched} = this.state
+    console.log(countrySearched)
     return (
       <div>
-        <Header />
-        <ShowCountries countries={countries}/>
+        <Header getCountrySearched={this.getCountrySearched.bind(this)}/>
+        <ShowCountries countrySearched={countrySearched} countries={countries}/>
       </div>
     );
   }
